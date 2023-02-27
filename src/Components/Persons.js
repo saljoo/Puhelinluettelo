@@ -1,8 +1,8 @@
 //Component to render one person's informations
-const Person = ({ name, number }) => {
+const Person = ({ name, number, deletePerson }) => {
     return (
       <div>
-        {name} {number}
+        {name} {number} <button onClick={deletePerson}>delete</button>
       </div>
     )
 }
@@ -12,7 +12,12 @@ const Persons = (props) => {
     return (
       <div>
         {props.filterPersons.map(person =>
-          <Person key={person.name} name={person.name} number={person.number} />
+          <Person
+            key={person.name}
+            name={person.name}
+            number={person.number}
+            deletePerson={() => props.deletePerson(person.id)}
+          />
         )}
       </div>
     )

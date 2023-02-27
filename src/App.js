@@ -52,6 +52,18 @@ const App = () => {
     }
   }
 
+  //Function that deletes person with certain id
+  const deletePersonWithId = (id) => {
+    const personToBeDeleted = persons.find(person => person.id === id)
+    if(window.confirm(`Delete ${personToBeDeleted.name}`)){
+      personService
+      .deletePerson(id)
+        .then(() => {
+          setPersons(persons.filter(person => person.id !== id))
+        })
+    }
+  }
+
   //Set filterValue to be the value of the input box
   const handleAddFilter = (event) => {
     setFilterValue(event.target.value)
@@ -82,7 +94,7 @@ const App = () => {
       
       <h3>Numbers</h3>
 
-      <Persons filterPersons={filterPersons}/>
+      <Persons filterPersons={filterPersons} deletePerson={deletePersonWithId}/>
     </div>
   )
 }
