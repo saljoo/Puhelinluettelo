@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Filter from "./Components/Filter";
-import PersonForm from "./Components/PersonForm";
-import Persons from "./Components/Persons";
+import Filter from "./components/Filter";
+import PersonForm from "./components/PersonForm";
+import Persons from "./components/Persons";
 
 //Main component
 const App = () => {
@@ -40,10 +40,15 @@ const App = () => {
       const personObject = {
         name: newName, number: newNumber
       }
-      setPersons(persons.concat(personObject))
-      //Clear input boxes
-      setNewName('')
-      setNewNumber('')
+
+      axios
+        .post('http://localhost:3001/persons', personObject)
+        .then(response => {
+          setPersons(persons.concat(response.data))
+          //Clear input boxes
+          setNewName('')
+          setNewNumber('')
+        })
     }
     
   }
